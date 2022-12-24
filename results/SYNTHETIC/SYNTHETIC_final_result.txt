@@ -1,0 +1,7 @@
+========== Final Result ============
+Dataset:             SYNTHETIC
+Best Accuracy:       0.6666666666666666
+Min Cost_time:       3.2766120433807373
+Var Cost_time:       0.9444393446081847
+-------------------------------
+
