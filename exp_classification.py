@@ -11,7 +11,7 @@ np.set_printoptions(threshold=np.inf)
 dataset=['MUTAG','BZR','PROTEINS','AIDS','PC-3','SF-295']
 per_dim= [25,50,10]
 for ds_name in dataset:
-    datasets = TUDataset(root=f'/tmp/DATA', name=f'{ds_name}')
+    datasets = TUDataset(root=f'/tmp/{ds_name}', name=f'{ds_name}')
     M=25
     if ds_name=='PROTEINS':
         T=3
@@ -41,7 +41,7 @@ for ds_name in dataset:
     scores = cross_val_score(predictor, gram_matrix, classes, cv=10,scoring='accuracy')
     acc_mean=np.mean(scores)
     acc_std=np.std(scores)
-    print("Score: {} ± {}".format(acc_mean*100,acc_std))
+    print("Score: {} ± {}".format(acc_mean,acc_std))
     end_time = time.time()
     print("程序的运行时间为",(end_time-start_time))
     msg = (
@@ -50,7 +50,7 @@ for ds_name in dataset:
         f'Accuracy:       {scores}\n'
         f'Cost_time:      {end_time-start_time}\n'
         '-------------------------------\n\n')
-    file = open(f'./results/{ds_name}/{ds_name}_M{M[i]}_T{str(T[j])}.txt', 'w')
+    file = open(f'./results/{ds_name}/{ds_name}_classification}.txt', 'w')
     file.write(msg)
 
 
