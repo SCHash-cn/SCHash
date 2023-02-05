@@ -5,7 +5,7 @@
 Create the environment:
 ```shell
 conda create --name schash python=3.9
-conda activate cwn
+conda activate schash
 conda install pip 
 ```
 
