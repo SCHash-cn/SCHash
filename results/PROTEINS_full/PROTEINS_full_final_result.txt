@@ -1,7 +1,0 @@
-========== Final Result ============
-Dataset:             PROTEINS_full
-Best Accuracy:       0.6747605186399644
-Min Cost_time:       8.233806610107422
-Var Cost_time:       67.167171311205
--------------------------------
-
