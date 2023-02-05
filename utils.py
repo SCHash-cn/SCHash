@@ -120,7 +120,7 @@ def SimHash(ts):
     ts = ts > threshold
     return  ts
 def ComputeFingerprint(Max_dim,graph_id,laplacians,feature,simplex_tables,m,t,id_maps,per_dim,emb_dim,result_square):
-    np.random.seed(229)
+    np.random.seed(222)
     if Max_dim==0:
         complex_dim=1
     else:
