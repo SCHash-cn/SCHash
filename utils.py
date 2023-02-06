@@ -21,7 +21,7 @@ def readFile(path):
             first_ele = False
         else:
             nums = [int(x) for x in nums]
-            matrix = np.c_[matrix,nums] #np.c_按行连接两个矩阵
+            matrix = np.c_[matrix,nums] 
     return matrix
 def graph_to_simplex(edges,size,Max_dim):
     st=gd.SimplexTree()
@@ -36,7 +36,7 @@ def graph_to_simplex(edges,size,Max_dim):
 
 def get_simplex_boundaries(simplex):
     boundaries = itertools.combinations(simplex, len(simplex) - 1)
-    return [tuple(boundary) for boundary in boundaries]  #tuple:元组,特点是不可变
+    return [tuple(boundary) for boundary in boundaries] 
 
 def build_tables(simplex_tree, size):
     complex_dim = simplex_tree.dimension()
@@ -102,14 +102,14 @@ def construct_features(feature, simplex_tables,id_maps,feature_dim):
     for dim in range(1,len(simplex_tables)):
        feature_d = np.zeros((len(simplex_tables[dim]), feature_dim))
 
-       for c, cell in enumerate(simplex_tables[dim]): #c是index，cell是index对应的元素
+       for c, cell in enumerate(simplex_tables[dim]): 
             #for i in range(len(cell)):
                # print(cell_tables[dim])
-                for _, node in enumerate(cell):  #c是index，cell是index对应的元素
+                for _, node in enumerate(cell): 
                   feature_d[id_maps[dim][tuple(cell)]] = np.maximum(feature_d[id_maps[dim][tuple(cell)]],feature[int(node)])
        features.append(feature_d)
     return features
-def construct_W(d,m,t):  #构建的w应该要满足高斯分布
+def construct_W(d,m,t):  
     W=[[]]
     W.append(np.random.normal(d,m))
     for i in range(t-1):
@@ -127,39 +127,9 @@ def ComputeFingerprint(Max_dim,graph_id,laplacians,feature,simplex_tables,m,t,id
         complex_dim=len(simplex_tables)
     Htmp=[]
     Hin = construct_features(feature, simplex_tables,id_maps,feature.shape[1])
-    for i in range(t): #迭代次数
+    for i in range(t): 
         for d in range(complex_dim):
-            # if i==0:
-            #     result_tmp=np.matmul(laplacians[d],Hin[d])
-            #     if result_tmp.shape[0]<per_dim[d]:
-            #         tmp=np.zeros((per_dim[d]-result_tmp.shape[0],result_tmp.shape[1]))
-            #         result_tmp=np.concatenate((result_tmp,tmp),0)
-            #     else:
-            #         result_tmp=result_tmp[:per_dim[d],]
-            #     W = np.random.randn(result_tmp.shape[1],m)
-            #     result_tmp=np.matmul(result_tmp,W)
-            #     # file.write(str(graph_id) + str(d)+'\n')
-            #     # str_w=[str(a) for a in W]
-            #     # file.write('\n'.join(str_w)+'\n')
-            #     # result_tmp = torch.mm(laplacians[d].float(), Hin[d].float())
-            #     # tmp_w=torch.randn(Hin[d].shape[1]).unsqueeze(1)
-            #     # result_tmp1=torch.mm(result_tmp,tmp_w).squeeze(1)
-            #     # if(len(simplex_tables[d])>per_dim[d]):
-            #     #     values, indices=result_tmp1.topk(per_dim[d],largest = False)
-            #     #     result=result_tmp[indices,:]
-            #     # else:
-            #     #     values, indices = result_tmp1.topk(len(simplex_tables[d]), largest=False)
-            #     #     result=torch.zeros((per_dim[d],Hin[d].shape[1]))
-            #     #     result[:len(simplex_tables[d])]=result_tmp[indices,:]
-            #     #result_tmp = result_tmp.view(-1).unsqueeze(dim=0)
-            #     #W=torch.randn(feature.shape[1],m)
-            #     #result=torch.mm(result,W)
-            #     Htmp.append(SimHash(result_tmp))
-            # else:
-            #     W=np.random.randn(m,m)
-            #     Htmp[d] = np.matmul(Htmp[d],W)
-            #     Htmp[d] = SimHash(Htmp[d])
-            # print(laplacians[d].shape,Hin[d].shape)
+            
             result_tmp = np.matmul(laplacians[d], Hin[d])
             W = np.random.randn(result_tmp.shape[1], m)
             result = np.matmul(result_tmp, W)
@@ -176,7 +146,7 @@ def ComputeFingerprint(Max_dim,graph_id,laplacians,feature,simplex_tables,m,t,id
             result = tmp
         else:
             result = np.concatenate((result, tmp), 0)
-    result_square[i,graph_id,:len(result)]=result #i是迭代次数，graph_id是图
+    result_square[i,graph_id,:len(result)]=result 
 
     return result_square
 
