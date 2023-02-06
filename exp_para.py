@@ -17,9 +17,9 @@ Acc=list()
 #迭代次数
 def iteration():
     for ds_name in dataset:
-        datasets = TUDataset(root=f'/tmp/DATA', name=f'{ds_name}')
-        M=[15,20,25,30]  #维度
-        T=[1,2,3,4,5]      #迭代次数
+        datasets = TUDataset(root=f'/tmp/{ds_name}', name=f'{ds_name}')
+        M=[15,20,25,30]  
+        T=[1,2,3,4,5]      
         max_dim=1
         Acc=list()
         Time=list()
