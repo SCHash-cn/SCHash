@@ -43,7 +43,7 @@ for ds_name in dataset:
     acc_std=np.std(scores)
     print("Score: {} ± {}".format(acc_mean,acc_std))
     end_time = time.time()
-    print("程序的运行时间为",(end_time-start_time))
+    print("cost time: ",(end_time-start_time))
     msg = (
         f'========== Result ============\n'
         f'Dataset:        {dataset}\n'
