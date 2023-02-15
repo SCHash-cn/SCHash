@@ -127,26 +127,25 @@ def ComputeFingerprint(Max_dim,graph_id,laplacians,feature,simplex_tables,m,t,id
         complex_dim=len(simplex_tables)
     Htmp=[]
     Hin = construct_features(feature, simplex_tables,id_maps,feature.shape[1])
-    for i in range(t): 
+       for i in range(t): #迭代次数
         for d in range(complex_dim):
-            
             result_tmp = np.matmul(laplacians[d], Hin[d])
             W = np.random.randn(result_tmp.shape[1], m)
             result = np.matmul(result_tmp, W)
             # Htmp.append(result_tmp)
             Hin[d] = SimHash(result)
-    for d in range(complex_dim):
-        if Hin[d].shape[0]<per_dim[d]:
-            tmp=np.zeros((per_dim[d]-Hin[d].shape[0],Hin[d].shape[1]))
-            Hin[d]=np.concatenate((Hin[d],tmp),0)
-        else:
-            Hin[d]=Hin[d][:per_dim[d],]
-        tmp = Hin[d].flatten()
-        if (d == 0):
-            result = tmp
-        else:
-            result = np.concatenate((result, tmp), 0)
-    result_square[i,graph_id,:len(result)]=result 
+        for d in range(complex_dim):
+            if Hin[d].shape[0]<per_dim[d]:
+                tmp=np.zeros((per_dim[d]-Hin[d].shape[0],Hin[d].shape[1]))
+                Htmp.append(np.concatenate((Hin[d],tmp),0))
+            else:
+                Htmp.append(Hin[d][:per_dim[d],])
+            tmp = Htmp[d].flatten()
+            if (d == 0):
+                result = tmp
+            else:
+                result = np.concatenate((result, tmp), 0)
+        result_square[i,graph_id,:len(result)]=result #i是迭代次数，graph_id是图
 
     return result_square
 
